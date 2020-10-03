@@ -22,7 +22,7 @@
         var ctx = myChart.getContext('2d');
         myChart.width = 200;
         Chart.defaults.global.defaultFontFamily = 'Lato';
-        Chart.defaults.global.defaultFontSize = 18;
+        Chart.defaults.global.defaultFontSize = 20;
         Chart.defaults.global.defaultFontColor = '#777';
 
         $.getJSON('https://api.covid19api.com/summary', addData);
@@ -44,7 +44,7 @@
                     datasets:[{
                         label: 'TotalCases',
                         data:[datapoint1,datapoint2,datapoint3,datapoint4,datapoint5,datapoint6],
-                        backgroundColor:['orange','red', 'green', 'blue', 'black', 'gray']
+                        backgroundColor:['red','orange', 'cyan', 'blue', 'black', 'gray']
                     }]},
 
                     title:{
@@ -53,7 +53,7 @@
                         responsive: true,
                         maintainAspectRatio: false
                     },
-                    
+
                     legend:{
                         display:true,
                         position:'right',
