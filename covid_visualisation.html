@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid19 Visialisation</title>
+</head>
+<body>
+    <p id='demo'></p>
+    <div class='container'>
+        <canvas class='col-8' id='mychart'>
+        </canvas>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+       integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
+         crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+
+    <script>
+        var myChart = document.getElementById('mychart');
+        var ctx = myChart.getContext('2d');
+        myChart.width = 200;
+        Chart.defaults.global.defaultFontFamily = 'Lato';
+        Chart.defaults.global.defaultFontSize = 18;
+        Chart.defaults.global.defaultFontColor = '#777';
+
+        $.getJSON('https://api.covid19api.com/summary', addData);
+        function addData(dataa){
+            console.log(dataa)
+            var datapoint1 = dataa.Global.TotalConfirmed;
+            var datapoint2 = dataa.Global.TotalDeaths;
+            var datapoint3 = dataa.Global.TotalRecovered;
+            var datapoint4 = dataa.Global.NewConfirmed;
+            var datapoint5 = dataa.Global.NewDeaths;
+            var datapoint6 = dataa.Global.NewRecovered;
+
+            var barChart = new Chart(myChart, {
+                type:'doughnut',
+                data:{
+                    labels:['Всего заражено', 'Всего смертей', 'Всего выздровили', 'Новые заражения',
+                                                               'Новые смерти', 'Новые выздровевшие'],
+                    
+                    datasets:[{
+                        label: 'TotalCases',
+                        data:[datapoint1,datapoint2,datapoint3,datapoint4,datapoint5,datapoint6],
+                        backgroundColor:['orange','red', 'green', 'blue', 'black', 'gray']
+                    }]},
+
+                    title:{
+                        display:true,
+                        text: 'График зараженных Ковид19 во всем мире!',
+                        responsive: true,
+                        maintainAspectRatio: false
+                    },
+                    
+                    legend:{
+                        display:true,
+                        position:'right',
+                        labels:{fontColor:'#000'}
+                    },
+                    layout:{
+                        padding:{
+                            left:50,
+                            right:0,
+                            bottom:0,
+                            top:0
+                        }}
+            
+            });
+            
+        }
+
+    </script>
+</body>
+</html>
