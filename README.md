@@ -1,1 +1,1 @@
-a graphics of covid19 in world 
+A graphics of covid19 in world 
